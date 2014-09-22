@@ -1,0 +1,14 @@
+<form action="/user/update/<%= user.id %>" method="POST">
+  <h2>Edit account</h2>
+  <% if (flash && flash.err) { %>
+    <ul class="alert alert-danger">
+      <% Object.keys(flash.err).forEach(function(error) { %>
+        <li><%= JSON.stringify(flash.err[error]) %></li>
+      <% }) %>
+    </ul>
+  <% } %>
+  <input value="<%= user.name %>" class="form-control" placeholder="Your name" name="name" />
+  <input value="<%= user.email %>" class="form-control" placeholder="Your email" name="email" />
+  <input type="hidden" name="_csrf" value="<%= _csrf %>" />
+  <input type="submit" class="btn btn-lg btn-primary btn-block" value="Edit Account" />
+</form>

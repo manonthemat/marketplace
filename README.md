@@ -164,3 +164,9 @@ After that, create the views/user/show.ejs.
 Note: Anything between <%= %> in the view gets escaped, while <%- %> gets run (potentially harmful scripts for example).
 
 ---
+# user index, edit and update
+Add the edit, update and index action in the UsersController, then add the views.
+
+There's plenty of to be refactored code, but it's good enough for now.
+
+---
