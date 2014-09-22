@@ -238,3 +238,13 @@ The logout function is very straight-forward. In the SessionController, add thes
         resp.redirect('/session/new');
       }
 ---
+# authentication policy
+To restrict access to our user actions to only authenticated users (with the exception of creating a new user), modify the config/policies.js like this
+
+      '*': 'flash',
+
+      user: {
+        'new': 'flash',
+        '*': 'sessionAuth'
+      }
+---
