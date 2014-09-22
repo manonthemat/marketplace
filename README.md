@@ -60,3 +60,18 @@ Adding a user with a non-unique email address should result in an error.
 
 
 Create some more users and then check for their existence by browsing to http://localhost:1337/user/
+
+---
+
+# user new
+Let's extend our UserController
+
+	module.exports = {
+      'new': function(req, resp) {
+        resp.view();
+      }
+    };
+
+Create a new views/user directory and create a new.ejs with a simple form in it.
+
+---
