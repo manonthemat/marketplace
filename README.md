@@ -75,3 +75,11 @@ Let's extend our UserController
 Create a new views/user directory and create a new.ejs with a simple form in it.
 
 ---
+# csrf
+Activate csrf protection in csrf.js
+
+    module.exports.csrf = true;
+    
+And add a hidden field in views/user/new.ejs.
+
+---
