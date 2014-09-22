@@ -200,3 +200,33 @@ Add a model method for User
           next();
         });
       }
+
+---
+# authentication
+Start by creating a new controller
+
+    sails generate controller session
+
+Add a new action to the SessionController
+
+    module.exports = {
+      'new': function(req, resp) {
+        resp.view();
+      }
+    };
+
+Create a directory for the session views
+
+    mkdir views/session
+
+and a new template (new.ejs) within that newly created directory.
+Within that template, create a simple form that holds email, password and (hidden) csrf token. It should post to /session/create on submit.
+
+Next up, create the create action in the SessionController.
+
+- Check for email and password in params sent via form, if they aren't present, redirect to the login page (session/new)
+- try to find the user by email, if there's no match, return a generic error as flash message and redirect to session/new
+- if password doesn't match, redirect to session/new
+- otherwise login and redirect to user page
+
+---
