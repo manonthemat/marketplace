@@ -230,3 +230,11 @@ Next up, create the create action in the SessionController.
 - otherwise login and redirect to user page
 
 ---
+# logout
+The logout function is very straight-forward. In the SessionController, add these lines
+
+      destroy: function(req, resp, next) {
+        req.session.destroy();
+        resp.redirect('/session/new');
+      }
+---

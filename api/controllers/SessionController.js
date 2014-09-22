@@ -45,6 +45,11 @@ module.exports = {
       });
     });
 
+  },
+
+  destroy: function(req, resp, next) {
+    req.session.destroy();
+    resp.redirect('/session/new');
   }
 };
 
