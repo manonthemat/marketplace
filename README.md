@@ -170,3 +170,14 @@ Add the edit, update and index action in the UsersController, then add the views
 There's plenty of to be refactored code, but it's good enough for now.
 
 ---
+# switching to mongodb
+Now lets just switch out our database to MongoDB.
+Using the 'someMongodbServer' defined in the connections.js, we set it as a default in the models.js.
+
+We also have to
+
+    npm install sails-mongo --save
+
+and start mongod. The --save flag adds the dependency to the package.json.
+
+---
