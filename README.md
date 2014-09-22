@@ -154,3 +154,13 @@ Next up: The config/policies.js needs adjustments.
 Add this line in the right place:
 
     '*': 'flash'
+
+---
+# user show
+Create a show function in the UserController and modify the create function to redirect to the show view of the created user.
+
+After that, create the views/user/show.ejs.
+
+Note: Anything between <%= %> in the view gets escaped, while <%- %> gets run (potentially harmful scripts for example).
+
+---

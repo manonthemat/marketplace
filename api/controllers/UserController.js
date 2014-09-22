@@ -18,8 +18,16 @@ module.exports = {
         return resp.redirect('/user/new');
       }
 
-      resp.json(user);
-      req.session.flash = {};
+      resp.redirect('/user/show/' + user.id);
+    });
+  },
+
+  show: function(req, resp, next) {
+    User.findOne(req.param('id'), function userFound(err, user) {
+      if (err) return next(err);
+      if (!user) return next();
+
+      resp.view({ user: user });
     });
   }
 };
