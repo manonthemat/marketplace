@@ -33,4 +33,30 @@ Now let's create a user model and controller. This command combines both actions
     sails generate api user
 ---
 
+# user validations
+Add some attributes and validations for the user model.
 
+    name: {
+      type: 'string',
+      required: true
+    },
+
+    email: {
+      type: 'string',
+      email: true, // email should be email
+      required: true,
+      unique: true
+    },
+
+    encryptedPassword: {
+      type: 'string'
+    }
+
+Restart the server and create a few users.
+
+    http://localhost:1337/user/create?name=Matthias+Sieber&email=matze@matzeone.com
+    
+Adding a user with a non-unique email address should result in an error.
+
+
+Create some more users and then check for their existence by browsing to http://localhost:1337/user/
