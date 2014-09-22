@@ -83,3 +83,16 @@ Activate csrf protection in csrf.js
 And add a hidden field in views/user/new.ejs.
 
 ---
+# User model toJSON function
+to prevent that password and csrf token get returned, overwrite the toJSON function in the user model.
+
+    toJSON: function() {
+      var obj = this.toObject();
+      delete obj.password;
+      delete obj.confirmation;
+      delete obj.encryptedPassword;
+      delete obj._csrf;
+      return obj;
+    }
+
+---
