@@ -99,3 +99,34 @@ to prevent that password and csrf token get returned, overwrite the toJSON funct
 # set schema to true
 in the user model, set the schema to true.
 That way, only listed attributes will be saved into the model.
+
+---
+# flash notices on signup
+Next up, we'll be implementing some flash notices on our sign-up form.
+
+Modify the UserController's new action and add the create function:
+
+    module.exports = {
+      'new': function(req, resp) {
+        resp.locals.flash = _.clone(req.session.flash);
+        resp.view();
+        req.session.flash = {};
+      },
+
+      create: function(req, resp, next) {
+        User.create(req.params.all(), function userCreated(err, user) {
+          if (err) {
+            console.log(err);
+            req.session.flash = { err: err };
+            return resp.redirect('/user/new');
+          }
+
+          resp.json(user);
+          req.session.flash = {};
+        });
+      }
+    };
+
+In the new.ejs (the view of the user signup form), add some ejs for the flash notices.
+
+---

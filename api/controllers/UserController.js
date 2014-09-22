@@ -7,7 +7,22 @@
 
 module.exports = {
   'new': function(req, resp) {
+    resp.locals.flash = _.clone(req.session.flash);
     resp.view();
+    req.session.flash = {};
+  },
+
+  create: function(req, resp, next) {
+    User.create(req.params.all(), function userCreated(err, user) {
+      if (err) {
+        console.log(err);
+        req.session.flash = { err: err };
+        return resp.redirect('/user/new');
+      }
+
+      resp.json(user);
+      req.session.flash = {};
+    });
   }
 };
 

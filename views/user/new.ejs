@@ -1,5 +1,12 @@
 <form action="/user/create" method="POST">
   <h2>Create an account</h2>
+  <% if (flash && flash.err) { %>
+    <ul class="alert alert-danger">
+      <% Object.keys(flash.err).forEach(function(error) { %>
+        <li><%= JSON.stringify(flash.err[error]) %></li>
+      <% }) %>
+    </ul>
+  <% } %>
   <input class="form-control" placeholder="Your name" name="name" required />
   <input class="form-control" placeholder="Your email" name="email" type="email" required />
   <input class="form-control" placeholder="Your password" name="password" type="password" />
