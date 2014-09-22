@@ -130,3 +130,27 @@ Modify the UserController's new action and add the create function:
 In the new.ejs (the view of the user signup form), add some ejs for the flash notices.
 
 ---
+# flash.js now middleware/policy
+Create a new file api/policies/flash.js:
+
+    module.exports = function(req, resp, next) {
+      resp.locals.flash = {};
+
+      // if there's no flash message, give control to the next middleware
+      if (!req.session.flash) return next();
+
+      // using underscore's clone function, cause req.session.flash by itself is a reference
+      resp.locals.flash = _.clone(req.session.flash);
+
+      // clear flash
+      req.session.flash = {};
+
+      next();
+    };
+
+Then remove anything flash-related in the new action of the UserController, so that the only thing that's left inside is the call to render the response view.
+
+Next up: The config/policies.js needs adjustments.
+Add this line in the right place:
+
+    '*': 'flash'

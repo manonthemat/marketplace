@@ -7,9 +7,7 @@
 
 module.exports = {
   'new': function(req, resp) {
-    resp.locals.flash = _.clone(req.session.flash);
     resp.view();
-    req.session.flash = {};
   },
 
   create: function(req, resp, next) {
