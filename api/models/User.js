@@ -34,6 +34,19 @@ module.exports = {
       delete obj._csrf;
       return obj;
     }
+  },
+
+  beforeCreate: function(values, next) {
+    // checks for set password
+    if (!values.password) return next({ err: ["No password set."] });
+    else if(values.password != values.confirmation) return next({ err: ["Password confirmation doesn't match password"] });
+
+    require('bcrypt').hash(values.password, 10, function passwordEncrypted(err, encryptedPassword) {
+      if (err) return next(err);
+
+      values.encryptedPassword = encryptedPassword;
+      next();
+    });
   }
 };
 
