@@ -7,6 +7,8 @@
 
 module.exports = {
 
+  schema: true, // this way, only listed attributes will be saved into the model
+
   attributes: {
     name: {
       type: 'string',

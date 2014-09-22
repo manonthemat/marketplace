@@ -96,3 +96,6 @@ to prevent that password and csrf token get returned, overwrite the toJSON funct
     }
 
 ---
+# set schema to true
+in the user model, set the schema to true.
+That way, only listed attributes will be saved into the model.
