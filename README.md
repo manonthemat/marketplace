@@ -248,3 +248,18 @@ To restrict access to our user actions to only authenticated users (with the exc
         '*': 'sessionAuth'
       }
 ---
+# automatic login
+
+To log in a newly created user, add these lines to the create function of the UserController:
+
+       req.session.authenticated = true;
+       req.session.User = user;
+
+To make this work, we need to update our policies.js for the user:
+
+    user: {
+      'new': 'flash',
+      create: 'flash',
+      '*': 'sessionAuth'
+    }
+---

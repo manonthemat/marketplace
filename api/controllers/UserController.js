@@ -18,6 +18,9 @@ module.exports = {
         return resp.redirect('/user/new');
       }
 
+      // Log user in
+      req.session.authenticated = true;
+      req.session.User = user;
       resp.redirect('/user/show/' + user.id);
     });
   },
