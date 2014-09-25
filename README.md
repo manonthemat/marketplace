@@ -263,3 +263,48 @@ To make this work, we need to update our policies.js for the user:
       '*': 'sessionAuth'
     }
 ---
+# add admin
+
+We want to have a distinction between regular users and admins. To create the distinction in the user model, we add an attribute admin, which is just a boolean:
+
+     admin: {
+       type: 'boolean',
+       defaultsTo: false
+     },
+
+Create a new policy (admin.js):
+
+    module.exports = function(req, resp, ok) {
+
+      if (req.session.user && req.session.user.admin) return ok();
+
+      // User is not allowed
+      req.session.flash = { err: ["Only admins are allowed here."] };
+      return resp.redirect('/session/new');
+    };
+
+Next, we want users only to be able to edit their own profile. We check for matching user ids here. Admins are also allowed to edit other users' profiles. This behavior might come in handy, so we write another policy (api/policies/userIdCheck.js) for that:
+
+    module.exports = function(req, resp, next) {
+
+      console.log(req.allParams());
+      console.log(req.session);
+      if(!(req.session.user.id === req.param('id') || req.session.user.admin)) {
+        req.session.flash = { err: ["Access denied"] };
+        return resp.redirect('/session/new');
+      }
+      next();
+    };
+
+Next, update the config/policies.js to make use of the new policies.
+
+      user: {
+        'new': 'flash',
+        create: 'flash',
+        show: 'userIdCheck',
+        update: 'userIdCheck',
+        edit: 'userIdCheck',
+        '*': 'admin'
+      }
+
+---
