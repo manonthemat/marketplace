@@ -37,6 +37,7 @@ module.exports = {
   // render the edit view
   edit: function(req, resp, next) {
     User.findOne(req.param('id'), function userFound(err, user) {
+      req.session.flash = { };
       if (err) return next(err);
       if (!user) return next();
 

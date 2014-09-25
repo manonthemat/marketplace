@@ -29,12 +29,11 @@ module.exports.policies = {
   '*': 'flash',
 
   user: {
-    'new': 'flash',
-    create: 'flash',
+    '*': 'flash',
+    index: 'userIdCheck',
     show: 'userIdCheck',
     update: 'userIdCheck',
-    edit: 'userIdCheck',
-    '*': 'admin'
+    edit: ['flash', 'userIdCheck']
   }
 
   /***************************************************************************

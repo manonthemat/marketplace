@@ -6,5 +6,6 @@ module.exports = function(req, resp, next) {
     req.session.flash = { err: ["Access denied"] };
     return resp.redirect('/session/new');
   }
+  req.session.flash = { success: ["You're allowed to do this, dude."] };
   next();
 };

@@ -320,3 +320,16 @@ Additionally we want to modify the index.ejs to show if a user has admin status.
 Also, we can do a npm install socket.io --save at this point to prepare for upcoming real-time goodness.
 
 ---
+# Policies
+our policies need some fixing (and more fixing later on, but this is what I got now).
+
+    '*': 'flash',
+
+    user: {
+      '*': 'flash',
+      index: 'userIdCheck',
+      show: 'userIdCheck',
+      update: 'userIdCheck',
+      edit: ['flash', 'userIdCheck']
+    }
+---
