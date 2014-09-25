@@ -20,7 +20,7 @@ module.exports = {
 
       // Log user in
       req.session.authenticated = true;
-      req.session.User = user;
+      req.session.user = user;
       resp.redirect('/user/show/' + user.id);
     });
   },

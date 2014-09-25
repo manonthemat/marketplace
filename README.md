@@ -308,3 +308,15 @@ Next, update the config/policies.js to make use of the new policies.
       }
 
 ---
+# Fix: Auto authenticate on user creation
+Now the problem with the current setup is, that when we are creating a user and want to redirect the user to its profile page, we can not do that, because that user is not logged in. Let's fix that!
+
+In the UserController, fix our typo in the create function:
+
+    req.session.user = user;
+
+Now our user logs in after creation.
+Additionally we want to modify the index.ejs to show if a user has admin status.
+Also, we can do a npm install socket.io --save at this point to prepare for upcoming real-time goodness.
+
+---
