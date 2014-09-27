@@ -333,3 +333,7 @@ our policies need some fixing (and more fixing later on, but this is what I got 
       edit: ['flash', 'userIdCheck']
     }
 ---
+# Security fix
+Making sure that the user create and update actions don't take a maliciously formed post request. User's can't become admin by just adding a form field with input name admin set to true any longer.
+
+---
